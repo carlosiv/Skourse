@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="carlosiv" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Bootstrap Forms</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <section class="start container vh-100  vh-100 d-flex justify-content-center align-items-center" id="start">
+            <a class="btn btn-primary" href="#second" role="button">Start</a>
+        </section>
+        <section class="container vh-100 position-relative" id="second">
+            <form class="row g-3 justify-content-center">
+                <h2 class="text-center">Login Details</h2>
+                <div class="col-md-6 col-lg-3">
+                  <label for="inputEmail4" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="inputEmail4">
+                </div>
+                <div class="col-md-6 col-lg-3">
+                  <label for="inputPassword4" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="inputPassword4">
+                </div>
+                
+                <div class="col-12 d-flex justify-content-center">
+                  <a class="btn btn-primary" href="#third" role="button">Next</a>
+                </div>
+              </form>
+        </section>
+        <section class="container vh-100 position-relative" id="third">
+            <form class="row g-3 justify-content-center">
+                <h2 class="text-center">Personal Details</h2>
+                <div class="col-md-6 col-lg-3">
+                  <label for="firstname" class="form-label">First Name</label>
+                  <input type="text" class="form-control" id="firstname">
+                </div>
+                <div class="col-md-6 col-lg-3">
+                  <label for="middlename" class="form-label">Middle Name</label>
+                  <input type="text" class="form-control" id="middlename">
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <label for="lastname" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastname">
+                </div>
+                <div  class="col-md-6 col-lg-3">
+                    <label for="extension" class="form-label">Extension</label>
+                    <select class="form-select" aria-label="extension">
+                        <option selected>Select</option>
+                        <option value="1">Sr</option>
+                        <option value="2">Jr</option>
+                        <option value="3">III</option>
+                        <option value="4">IV</option>
+                        <option value="5">V</option>
+                      </select>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                  <a class="btn btn-primary" href="#fourth" role="button">Next</a>
+                </div>
+              </form>
+        </section>
+        <section class="container vh-100" id="fourth">
+            <form class="row g-3 justify-content-center">
+                <h2 class="text-center">Address</h2>
+                <div class="row">
+                    <div class="col-md-6 col-lg-3">
+                      <label for="house-street-num" class="form-label">Unit/House/Street Number</label>
+                      <input type="text" class="form-control" id="house-street-num">
+                    </div>
+                    <div class="col-md-6 col-lg-9">
+                      <label for="street" class="form-label">Street Name</label>
+                      <input type="text" class="form-control" id="street">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-3">
+                        <label for="brgy" class="form-label">Barangay</label>
+                        <input type="text" class="form-control" id="brgy">
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <label for="city-mun" class="form-label">City/Municipality</label>
+                        <input type="text" class="form-control" id="city-mun">
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <label for="prov" class="form-label">Province</label>
+                        <input type="text" class="form-control" id="prov">
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <label for="zip" class="form-label">Postal Code</label>
+                        <input type="text" class="form-control" id="zip">
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                  <a class="btn btn-primary" href="#fifth" role="button">Next</a>
+                </div>
+              </form>
+        </section>
+        <section class="fifth container vh-100 d-flex justify-content-center align-items-center" id="fifth">
+            <div class="row">
+                <div class="col mx-auto">
+                    <h2>Thank you!</h2>
+                </div>
+            </div>
+        </section>
+      
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
