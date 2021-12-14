@@ -13,172 +13,191 @@
     />
     <title>Basic Calculator</title>
   </head>
-  <body>
-    <div class="calculator container col-sm m-2 mx-auto">
-      <div class="row bg-warning justify-content-center">
-        <input
-          type="text"
-          value="0"
-          class="
-            col-12 col-lg-4
-            border border-primary
-            rounded
-            p-0
-            m-0
-            fs-2
-            text-end
-          "
-          id="numInput"
-        />
+  <body class="d-flex">
+    <div class="row row-cols-1 g-4 mx-auto mt-5">
+      <div class="col">
+        <div class="card bg-dark" style="width: 24rem;">
+          <div class="card-body">
+            <div class="calculator m-2 mx-auto">
+              <div class="row bg-warning justify-content-center">
+                <input
+                  type="text"
+                  value="0"
+                  class="
+                    col-12
+                    border border-primary
+                    rounded
+                    p-0
+                    m-0
+                    fs-2
+                    text-end
+                  "
+                  id="numInput"
+                />
+              </div>
+              <div class="row text-center justify-content-center">
+                <button
+                  type="button"
+                  class="operationButton col-3 btn btn-outline-primary btn-lg"
+                  data-calc-value="clear"
+                >
+                &#8448;
+                </button>
+                <button
+                  type="button"
+                  class="operationButton col-3 btn btn-outline-primary btn-lg"
+                  data-calc-value="sign"
+                >
+                  +/-
+                </button>
+                <button
+                  type="button"
+                  class="operationButton col-3 btn btn-outline-primary btn-lg"
+                  data-calc-value="percent"
+                >
+                  %
+                </button>
+                <button
+                  type="button"
+                  class="operationButton col-3 btn btn-outline-primary btn-lg"
+                  data-calc-value="divide"
+                >
+                &divide;
+                </button>
+              </div>
+              <div class="row text-center justify-content-center">
+                <button
+                  type="button"
+                  class="col-3 btn btn-outline-primary btn-lg"
+                  data-num-value="7"
+                >
+                  7
+                </button>
+                <button
+                  type="button"
+                  class="col-3 btn btn-outline-primary btn-lg"
+                  data-num-value="8"
+                >
+                  8
+                </button>
+                <button
+                  type="button"
+                  class="col-3 btn btn-outline-primary btn-lg"
+                  data-num-value="9"
+                >
+                  9
+                </button>
+                <button
+                  type="button"
+                  class="operationButton col-3 btn btn-outline-primary btn-lg"
+                  data-calc-value="multiply"
+                >
+                &times;
+                </button>
+              </div>
+              <div class="row text-center justify-content-center">
+                <button
+                  type="button"
+                  class="col-3 btn btn-outline-primary btn-lg"
+                  data-num-value="4"
+                >
+                  4
+                </button>
+                <button
+                  type="button"
+                  class="col-3 btn btn-outline-primary btn-lg"
+                  data-num-value="5"
+                >
+                  5
+                </button>
+                <button
+                  type="button"
+                  class="col-3 btn btn-outline-primary btn-lg"
+                  data-num-value="6"
+                >
+                  6
+                </button>
+                <button
+                  type="button"
+                  class="operationButton col-3 btn btn-outline-primary btn-lg"
+                  data-calc-value="subtract"
+                >
+                  -
+                </button>
+              </div>
+              <div class="row text-center justify-content-center">
+                <button
+                  type="button"
+                  class="col-3 btn btn-outline-primary btn-lg"
+                  data-num-value="1"
+                >
+                  1
+                </button>
+                <button
+                  type="button"
+                  class="col-3 btn btn-outline-primary btn-lg"
+                  data-num-value="2"
+                >
+                  2
+                </button>
+                <button
+                  type="button"
+                  class="col-3 btn btn-outline-primary btn-lg"
+                  data-num-value="3"
+                >
+                  3
+                </button>
+                <button
+                  type="button"
+                  class="operationButton col-3 btn btn-outline-primary btn-lg"
+                  data-calc-value="add"
+                >
+                  +
+                </button>
+              </div>
+              <div class="row text-center justify-content-center row-cols-4">
+                <button
+                  type="button"
+                  class="col-3 btn btn-outline-primary btn-lg"
+                  data-num-value="0"
+                >
+                  0
+                </button>
+                <button
+                  type="button"
+                  class="col-3 btn btn-outline-primary btn-lg"
+                  data-calc-value="delete"
+                >
+                &larr;
+                </button>
+                <button
+                  type="button"
+                  class="col-3 btn btn-outline-primary btn-lg"
+                  data-calc-value="decimal"
+                >
+                  .
+                </button>
+                <button
+                  type="button"
+                  class="operationButton col-3 btn btn-outline-primary btn-lg"
+                  data-num-value="answer"
+                >
+                  =
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="row text-center justify-content-center">
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-calc-value="ac"
-        >
-          AC
-        </button>
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-calc-value="sign"
-        >
-          +/-
-        </button>
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-calc-value="percent"
-        >
-          %
-        </button>
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-calc-value="divide"
-        >
-          /
-        </button>
-      </div>
-      <div class="row text-center justify-content-center">
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-num-value="7"
-        >
-          7
-        </button>
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-num-value="8"
-        >
-          8
-        </button>
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-num-value="9"
-        >
-          9
-        </button>
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-calc-value="multiply"
-        >
-          *
-        </button>
-      </div>
-      <div class="row text-center justify-content-center">
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-num-value="4"
-        >
-          4
-        </button>
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-num-value="5"
-        >
-          5
-        </button>
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-num-value="6"
-        >
-          6
-        </button>
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-calc-value="subtract"
-        >
-          -
-        </button>
-      </div>
-      <div class="row text-center justify-content-center">
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-num-value="1"
-        >
-          1
-        </button>
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-num-value="2"
-        >
-          2
-        </button>
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-num-value="3"
-        >
-          3
-        </button>
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-calc-value="add"
-        >
-          +
-        </button>
-      </div>
-      <div class="row text-center justify-content-center row-cols-4">
-        <button
-          type="button"
-          class="col-6 col-lg-2 btn btn-outline-primary btn-lg"
-          data-num-value="0"
-        >
-          0
-        </button>
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-calc-value="decimal"
-        >
-          .
-        </button>
-        <button
-          type="button"
-          class="col-3 col-lg-1 btn btn-outline-primary btn-lg"
-          data-num-value="answer"
-        >
-          =
-        </button>
-      </div>
+
+
+
     </div>
+ 
     <script>
       const calculator = document.querySelector(".calculator");
       const calcInput = document.querySelector("#numInput");
-      const calcButton = document.querySelector(".btn");
+      const calcButton = document.getElementsByClassName("operationButton");
       let num1 = 0;
       let operation
       calculator.addEventListener("click", (e) => {
@@ -205,7 +224,11 @@
             }
 
             if (e.target.dataset.calcValue === "add") {
-              calcButton.classList.add("disabled");
+              console.log(calcButton.length)
+              for(var i = 1; i < calcButton.length; i++) {
+                calcButton[i].classList.add("disabled")
+}
+             
               e.target.classList.remove("disabled");
 
               e.target.classList.add("active");
