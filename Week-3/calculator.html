@@ -46,7 +46,7 @@
                 <button
                   type="button"
                   class="operationButton col-3 btn btn-outline-primary btn-lg"
-                  data-calc-value="sign"
+                  data-num-value="sign"
                 >
                   +/-
                 </button>
@@ -180,7 +180,7 @@
                 <button
                   type="button"
                   class="operationButton col-3 btn btn-outline-primary btn-lg"
-                  data-num-value="answer"
+                  data-calc-value="answer"
                 >
                   =
                 </button>
@@ -196,6 +196,7 @@
       const calcInput = document.querySelector("#numInput");
       const calcButton = document.getElementsByClassName("operationButton");
       let num1 = 0;
+      let num2 = 0;
       let operation = '';
       calculator.addEventListener("click", (e) => {
         
@@ -221,12 +222,43 @@
               setButtonProperty("add");
               num1 = calcInput.value;
               calcInput.value = 0;
+              operation = 'add'
+            
+            }
+            if (e.target.dataset.calcValue === "subtract") {
+              //set some button disabled/active
+              setButtonProperty("subtract");
+              num1 = calcInput.value;
+              calcInput.value = 0;
+              operation = 'subtract'
+            
+            }
+
+            if (e.target.dataset.calcValue === "multiply") {
+              //set some button disabled/active
+              setButtonProperty("multiply");
+              num1 = calcInput.value;
+              calcInput.value = 0;
+              operation = 'multiply'
+            
+            }
+
+            if (e.target.dataset.calcValue === "divide") {
+              //set some button disabled/active
+              setButtonProperty("divide");
+              num1 = calcInput.value;
+              calcInput.value = 0;
+              operation = 'divide'
             
             }
 
             if (e.target.dataset.calcValue === "answer") {
               //check for num1 and operation
               //3 possible values ==> both empty, has num1, has operation(both not empty)
+              num2 = calcInput.value;
+              calculate()
+              resetButtonProperty()
+
             }
 
             if (e.target.dataset.calcValue === "delete") {
@@ -246,9 +278,12 @@
         if(calcInput.value.includes(".")) {
           calcInput.value = calcInput.value + e.target.dataset.numValue;
         } 
+        else if ( e.target.dataset.numValue === 'sign') {
+          calcInput.value.includes("-")? calcInput.value = calcInput.value.substring(1): calcInput.value = '-' + calcInput.value;
+        } 
         else if (calcInput.value == 0) {
           calcInput.value = e.target.dataset.numValue;
-        } 
+        }
         else {
           calcInput.value = calcInput.value + e.target.dataset.numValue;
         }
@@ -257,13 +292,33 @@
       function setButtonProperty(operation) {
       
         for (var i = 1; i < calcButton.length; i++) {
-
-          calcButton[i].dataset.calcValue === operation ? calcButton[i].classList.add("active") :
-          calcButton[i].classList.add("disabled");
+          if (calcButton[i].dataset.calcValue === operation) {
+            calcButton[i].classList.add("active")
+          } else if (calcButton[i].dataset.calcValue === 'answer'||calcButton[i].dataset.numValue === 'sign') {
+            
+          } else {
+            calcButton[i].classList.add("disabled");
+          }
+          
         }
 
        
       }
+
+      function resetButtonProperty() {
+      
+      for (var i = 1; i < calcButton.length; i++) {
+        
+          calcButton[i].classList.remove("active")
+        
+          calcButton[i].classList.remove("disabled");
+        }
+        
+      }
+
+     
+    
+
 
       function deleteLastInput() {
         calcInput.value.length>1 ?
@@ -276,6 +331,24 @@
         calcInput.value = 0
         num1 = 0
         operation = ''
+      }
+
+      function calculate() {
+        if (operation==='add') {
+          calcInput.value = parseFloat(num1) + parseFloat(num2)
+        }
+        if (operation==='subtract') {
+          calcInput.value = parseFloat(num1) - parseFloat(num2)
+        }
+
+        if (operation==='multiply') {
+          calcInput.value = parseFloat(num1) * parseFloat(num2)
+        }
+
+        if (operation==='divide') {
+          calcInput.value = parseFloat(num1) / parseFloat(num2)
+        }
+       
       }
     </script>
   </body>
