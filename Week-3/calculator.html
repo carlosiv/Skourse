@@ -252,9 +252,18 @@
             
             }
 
+            if (e.target.dataset.calcValue === "percent") {
+              //set some button disabled/active
+              //setButtonProperty("percent");
+              //num1 = calcInput.value;
+              //calcInput.value = 0;
+              operation = 'percent'
+              calculate()
+            
+            }
+
             if (e.target.dataset.calcValue === "answer") {
-              //check for num1 and operation
-              //3 possible values ==> both empty, has num1, has operation(both not empty)
+              //calculate answer
               num2 = calcInput.value;
               calculate()
               resetButtonProperty()
@@ -316,10 +325,6 @@
         
       }
 
-     
-    
-
-
       function deleteLastInput() {
         calcInput.value.length>1 ?
         calcInput.value = calcInput.value.slice(0, -1) 
@@ -347,6 +352,9 @@
 
         if (operation==='divide') {
           calcInput.value = parseFloat(num1) / parseFloat(num2)
+        }
+        if (operation==='percent') {
+          calcInput.value = parseFloat(calcInput.value)*100
         }
        
       }
