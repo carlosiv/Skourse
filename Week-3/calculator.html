@@ -16,7 +16,7 @@
   <body class="d-flex">
     <div class="row row-cols-1 g-4 mx-auto mt-5">
       <div class="col">
-        <div class="card bg-dark" style="width: 24rem;">
+        <div class="card bg-dark" style="width: 24rem">
           <div class="card-body">
             <div class="calculator m-2 mx-auto">
               <div class="row bg-warning justify-content-center">
@@ -41,7 +41,7 @@
                   class="operationButton col-3 btn btn-outline-primary btn-lg"
                   data-calc-value="clear"
                 >
-                &#8448;
+                  &#8448;
                 </button>
                 <button
                   type="button"
@@ -62,7 +62,7 @@
                   class="operationButton col-3 btn btn-outline-primary btn-lg"
                   data-calc-value="divide"
                 >
-                &divide;
+                  &divide;
                 </button>
               </div>
               <div class="row text-center justify-content-center">
@@ -92,7 +92,7 @@
                   class="operationButton col-3 btn btn-outline-primary btn-lg"
                   data-calc-value="multiply"
                 >
-                &times;
+                  &times;
                 </button>
               </div>
               <div class="row text-center justify-content-center">
@@ -168,7 +168,7 @@
                   class="col-3 btn btn-outline-primary btn-lg"
                   data-calc-value="delete"
                 >
-                &larr;
+                  &larr;
                 </button>
                 <button
                   type="button"
@@ -189,27 +189,20 @@
           </div>
         </div>
       </div>
-
-
-
     </div>
- 
+
     <script>
       const calculator = document.querySelector(".calculator");
       const calcInput = document.querySelector("#numInput");
       const calcButton = document.getElementsByClassName("operationButton");
       let num1 = 0;
-      let operation
+      let operation = '';
       calculator.addEventListener("click", (e) => {
-        //console.log(calcButton.classList)
+        
         if (e.target.matches("button")) {
           if ("numValue" in e.target.dataset === true) {
-            //console.log(e.target.dataset.numValue);
-            if (calcInput.value == 0) {
-              calcInput.value = e.target.dataset.numValue;
-            } else {
-              calcInput.value = calcInput.value + e.target.dataset.numValue;
-            }
+            //call function to set display
+            setDisplay(e);
           }
           if ("calcValue" in e.target.dataset === true) {
             //console.log(e.target.dataset.calcValue);
@@ -224,28 +217,66 @@
             }
 
             if (e.target.dataset.calcValue === "add") {
-              console.log(calcButton.length)
-              for(var i = 1; i < calcButton.length; i++) {
-                calcButton[i].classList.add("disabled")
-}
-             
-              e.target.classList.remove("disabled");
-
-              e.target.classList.add("active");
+              //set some button disabled/active
+              setButtonProperty("add");
               num1 = calcInput.value;
               calcInput.value = 0;
-
-              //console.log(num1);
+            
             }
 
             if (e.target.dataset.calcValue === "answer") {
               //check for num1 and operation
               //3 possible values ==> both empty, has num1, has operation(both not empty)
+            }
 
+            if (e.target.dataset.calcValue === "delete") {
+              //remove last character
+              deleteLastInput()
+            }
+
+            if (e.target.dataset.calcValue === "clear") {
+              //clear input field and reset vars
+              clearDisplay()
             }
           }
         }
       });
+
+      function setDisplay(e) {
+        if(calcInput.value.includes(".")) {
+          calcInput.value = calcInput.value + e.target.dataset.numValue;
+        } 
+        else if (calcInput.value == 0) {
+          calcInput.value = e.target.dataset.numValue;
+        } 
+        else {
+          calcInput.value = calcInput.value + e.target.dataset.numValue;
+        }
+      }
+
+      function setButtonProperty(operation) {
+      
+        for (var i = 1; i < calcButton.length; i++) {
+
+          calcButton[i].dataset.calcValue === operation ? calcButton[i].classList.add("active") :
+          calcButton[i].classList.add("disabled");
+        }
+
+       
+      }
+
+      function deleteLastInput() {
+        calcInput.value.length>1 ?
+        calcInput.value = calcInput.value.slice(0, -1) 
+        : calcInput.value = 0
+        
+      }
+
+      function clearDisplay() {
+        calcInput.value = 0
+        num1 = 0
+        operation = ''
+      }
     </script>
   </body>
 </html>
