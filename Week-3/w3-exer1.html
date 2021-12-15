@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="carlosiv" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <title>JavaScript Exercises 1</title>
+  </head>
+  <body>
+    <div class="container position-relative">
+      <section class="exer1 container-fluid mt-5">
+        <div class="card border-primary w-50 mx-auto">
+          <div class="card-body">
+            <h5 class="card-title">Number Divisibility Checker</h5>
+            <span class="card-text"
+              >A function that check if a number from 1 up to your input number
+              is</span
+            >
+            <ul>
+              <li>Fizz - divisible by 3</li>
+              <li>Buzz - divisible by 5</li>
+              <li>Fizz Buzz - divisible by 15</li>
+            </ul>
+            <form class="fizz">
+              <div class="mb-3">
+                <label for="numberInput" class="form-label"
+                  >Input a Number</label
+                >
+                <input
+                  type="number"
+                  class="form-control w-25"
+                  id="numberInput"
+                />
+                <span class="text-danger text-xs"
+                  >Large number loads longer</span
+                >
+              </div>
+              <button type="button" class="btn btn-primary" data-calculate>
+                Check
+              </button>
+              <button type="button" class="btn btn-secondary" data-clear>
+                Clear
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="div-table w-75 mx-auto"></div>
+      </section>
+      <section class="exer2 container-fluid">
+        <div class="card border-primary w-50 m-3 mx-auto">
+          <div class="card-body">
+            <h5 class="card-title">Word Location Checker</h5>
+            <span class="card-text"
+              >A function to check whether the word
+              <code>script</code> (case-sensitive) appears in the 5<sup>th</sup>
+              position or 4<sup>th</sup> index of a given word.</span
+            >
+            <form class="word-checker">
+              <div class="mb-3">
+                <label for="wordInput" class="form-label"
+                  >Input your word</label
+                >
+                <input type="text" class="form-control w-25" id="wordInput" />
+              </div>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-calculate
+                disabled
+              >
+                Check
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-cleartext
+                disabled
+              >
+                Clear
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="div-table-2 w-75 mx-auto"></div>
+      </section>
+      <section class="exer3 container-fluid mb-5">
+        <div class="card border-primary w-50 m-3 mx-auto">
+          <div class="card-body">
+            <h5 class="card-title">Leap Year Checker</h5>
+            <span class="card-text"
+              >A function to check whether the year is a leap year.</span
+            >
+            <form class="leap-checker">
+              <div class="mb-3">
+                <label for="yearInput" class="form-label text-sm fw-bold"
+                  >Input a valid year</label
+                >
+                <input type="number" class="form-control w-25" id="yearInput" />
+              </div>
+              <button type="button" class="btn btn-primary" data-calculate-year>
+                Check
+              </button>
+              <button type="button" class="btn btn-secondary" data-clear-year>
+                Clear
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="div-table-3 w-75 mx-auto">
+          <div
+            class="
+              toast-container
+              position-absolute
+              top-50
+              start-50
+              translate-middle
+            "
+            style="z-index: 11"
+          >
+            <div
+              id="myToast"
+              class="toast hide"
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true"
+            >
+              <div class="toast-header bg-primary">
+                <strong class="me-auto text-white">Leap Year Checker</strong>
+
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="toast"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="toast-body bg-info text-white"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script>
+      const fizz = document.querySelector(".fizz");
+      const wordChecker = document.querySelector(".word-checker");
+      const leapChecker = document.querySelector(".leap-checker");
+      fizz.addEventListener("click", (e) => {
+        if (e.target.matches("button")) {
+          const numberInput = document.querySelector("#numberInput");
+          let outputTable = document.querySelector(".div-table");
+          if ("calculate" in e.target.dataset === true) {
+            for (let i = 1; i <= numberInput.value; i++) {
+              if (i % 15 === 0) {
+                outputTable.innerHTML += `<span class="badge bg-primary m-4">Fizz Buzz</span>`;
+              } else if (i % 5 === 0) {
+                outputTable.innerHTML += `<span class="badge bg-warning m-4">Buzz</span>`;
+              } else if (i % 3 === 0) {
+                outputTable.innerHTML += `<span class="badge bg-info m-4">Fizz</span>`;
+              } else {
+                outputTable.innerHTML += `<span class="m-4">${i}</span>`;
+              }
+            }
+          }
+          if ("clear" in e.target.dataset === true) {
+            numberInput.value = 0;
+            outputTable.innerHTML = "";
+          }
+        }
+      });
+
+      leapChecker.addEventListener("click", (e) => {
+        if (e.target.matches("button")) {
+          const yearInput = document.querySelector("#yearInput");
+          let yearOutputTable = document.querySelector(".div-table-3");
+          let toastOutput = document.querySelector(".toast-body");
+          let toast = document.querySelector(".toast");
+          var myToast = bootstrap.Toast.getOrCreateInstance(toast);
+          if ("calculateYear" in e.target.dataset === true) {
+            if (
+              yearInput.value == 0 ||
+              yearInput.value === "" ||
+              yearInput.value < 0
+            ) {
+              toastOutput.innerHTML = `<span class="fw-bold text-danger">The year must not be empty or must be greater than 0</span>`;
+            } else {
+              if (yearInput.value % 4 === 0) {
+                if (yearInput.value % 100 === 0) {
+                  if (yearInput.value % 400 === 0) {
+                    toastOutput.innerHTML = `<span class="fw-bold text-dark">The year ${yearInput.value} is a leap year.</span>`;
+                  } else {
+                    toastOutput.innerHTML = `<span class="fw-bold text-danger">The year ${yearInput.value} is NOT leap year.</span>`;
+                  }
+                } else {
+                  toastOutput.innerHTML = `<span class="fw-bold text-dark">The year ${yearInput.value} is a leap year.</span>`;
+                }
+              } else {
+                toastOutput.innerHTML = `<span class="fw-bold text-danger">The year ${yearInput.value} is NOT leap year.</span>`;
+              }
+            }
+            myToast.show();
+          }
+        }
+        if ("clearYear" in e.target.dataset === true) {
+          yearInput.value = 0;
+          yearOutputTable.innerHTML = "";
+        }
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
