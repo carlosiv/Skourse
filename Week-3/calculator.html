@@ -204,6 +204,7 @@
       calculator.addEventListener("click", (e) => {
         
         if (e.target.matches("button")) {
+         
           if ("numValue" in e.target.dataset === true) {
             //call function to set display
             setDisplay(e.target.dataset.numValue);
@@ -226,22 +227,14 @@
 
             if (e.target.dataset.calcValue === "multiply") {
               setOperation('multiply')
-            
             }
 
             if (e.target.dataset.calcValue === "divide") {
               setOperation('divide')
-            
             }
 
             if (e.target.dataset.calcValue === "percent") {
-              //set some button disabled/active
-              //setButtonProperty("percent");
-              //num1 = calcInput.value;
-              //calcInput.value = 0;
-              operation = 'percent'
-              calculate()
-            
+              calcInput.value = parseFloat(calcInput.value)/100
             }
 
             if (e.target.dataset.calcValue === "answer") {
@@ -295,11 +288,12 @@
       });
 
       function setDisplay(val) {
-        if(calcInput.value.includes(".")) {
-          calcInput.value = calcInput.value + val;
-        } 
-        else if ( val === 'sign') {
+      
+        if ( val === 'sign') {
           calcInput.value.includes("-")? calcInput.value = calcInput.value.substring(1): calcInput.value = '-' + calcInput.value;
+        } 
+        else if(calcInput.value.includes(".")) {
+          calcInput.value = calcInput.value + val;
         } 
         else if (calcInput.value == 0) {
           calcInput.value = val;
@@ -323,7 +317,7 @@
         for (var i = 1; i < calcButton.length; i++) {
           if (calcButton[i].dataset.calcValue === operation) {
             calcButton[i].classList.add("active")
-          } else if (calcButton[i].dataset.calcValue === 'answer'||calcButton[i].dataset.numValue === 'sign') {
+          } else if (calcButton[i].dataset.calcValue === 'percent' || calcButton[i].dataset.calcValue === 'answer'||calcButton[i].dataset.numValue === 'sign') {
             
           } else {
             calcButton[i].classList.add("disabled");
@@ -374,6 +368,8 @@
       }
 
       function calculate() {
+        console.log('num1 '+num1)
+          console.log('num2 '+num2)
         if (operation==='add') {
           calcInput.value = parseFloat(num1) + parseFloat(num2)
         }
@@ -382,16 +378,14 @@
         }
 
         if (operation==='multiply') {
+         
           calcInput.value = parseFloat(num1) * parseFloat(num2)
         }
 
         if (operation==='divide') {
           calcInput.value = parseFloat(num1) / parseFloat(num2)
         }
-        if (operation==='percent') {
-          calcInput.value = parseFloat(calcInput.value)*100
-        }
-       
+        
       }
     </script>
   </body>
