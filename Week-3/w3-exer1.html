@@ -72,23 +72,52 @@
               <button
                 type="button"
                 class="btn btn-primary"
-                data-calculate
-                disabled
+                data-calculate-word
               >
                 Check
               </button>
               <button
                 type="button"
                 class="btn btn-secondary"
-                data-cleartext
-                disabled
+                data-clear-word
               >
                 Clear
               </button>
             </form>
           </div>
         </div>
-        <div class="div-table-2 w-75 mx-auto"></div>
+        <div class="div-table-2 w-75 mx-auto">
+            <div
+            class="
+              toast-container
+              position-absolute
+              top-50
+              start-50
+              translate-middle
+            "
+            style="z-index: 11"
+          >
+            <div
+              id="myStringCheckerToast"
+              class="toast hide"
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true"
+            >
+              <div class="toast-header bg-primary">
+                <strong class="me-auto text-white">String Checker</strong>
+
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="toast"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="toast-body text-white p-3 text-center" id="string-checker-toast"></div>
+            </div>
+          </div>
+        </div>
       </section>
       <section class="exer3 container-fluid mb-5">
         <div class="card border-primary w-50 m-3 mx-auto">
@@ -141,7 +170,7 @@
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="toast-body bg-info text-white"></div>
+              <div class="toast-body text-white p-3 text-center"></div>
             </div>
           </div>
         </div>
@@ -175,6 +204,36 @@
         }
       });
 
+      wordChecker.addEventListener("click", (e) => {
+        if (e.target.matches("button")) {
+          const wordInput = document.querySelector("#wordInput");
+          let wordOutputTable = document.querySelector(".div-table-2");
+          let stringToast = document.querySelector("#myStringCheckerToast");
+          let stringToastOutput = document.querySelector("#string-checker-toast");
+          var myStringCheckerToast = bootstrap.Toast.getOrCreateInstance(stringToast);
+          if ("calculateWord" in e.target.dataset === true) {
+              const refString = "script"
+              const newString = wordInput.value.substr(4,6)
+              if (wordInput.value === '') {
+                stringToastOutput.innerHTML = `<span class="fw-bold text-danger">The string is empty.</span>`;
+                  
+              } else {
+                if (newString === refString) {
+                stringToastOutput.innerHTML = `<span class="fw-bold text-dark">The string <code>script</code> is found in <q class="text-primary">${wordInput.value}</q> at exact location.</span>`;
+              } else {
+                stringToastOutput.innerHTML = `<span class="fw-bold text-danger">The string <code>script</code> is NOT found in <q class="text-primary">${wordInput.value}</q> at exact location.</span>`;
+              }
+              }
+              myStringCheckerToast.show();
+          
+          }
+          if ("clearWord" in e.target.dataset === true) {
+            wordInput.value = '';
+            wordOutputTable.innerHTML = "";
+          }
+        }
+      });
+
       leapChecker.addEventListener("click", (e) => {
         if (e.target.matches("button")) {
           const yearInput = document.querySelector("#yearInput");
@@ -195,13 +254,13 @@
                   if (yearInput.value % 400 === 0) {
                     toastOutput.innerHTML = `<span class="fw-bold text-dark">The year ${yearInput.value} is a leap year.</span>`;
                   } else {
-                    toastOutput.innerHTML = `<span class="fw-bold text-danger">The year ${yearInput.value} is NOT leap year.</span>`;
+                    toastOutput.innerHTML = `<span class="fw-bold text-danger">The year ${yearInput.value} is NOT a leap year.</span>`;
                   }
                 } else {
                   toastOutput.innerHTML = `<span class="fw-bold text-dark">The year ${yearInput.value} is a leap year.</span>`;
                 }
               } else {
-                toastOutput.innerHTML = `<span class="fw-bold text-danger">The year ${yearInput.value} is NOT leap year.</span>`;
+                toastOutput.innerHTML = `<span class="fw-bold text-danger">The year ${yearInput.value} is NOT a leap year.</span>`;
               }
             }
             myToast.show();
