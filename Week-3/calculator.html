@@ -33,6 +33,7 @@
                     text-end
                   "
                   id="numInput"
+                  readonly
                 />
               </div>
               <div class="row text-center justify-content-center">
@@ -198,57 +199,38 @@
       let num1 = 0;
       let num2 = 0;
       let operation = '';
+      
+
       calculator.addEventListener("click", (e) => {
         
         if (e.target.matches("button")) {
           if ("numValue" in e.target.dataset === true) {
             //call function to set display
-            setDisplay(e);
+            setDisplay(e.target.dataset.numValue);
           }
           if ("calcValue" in e.target.dataset === true) {
             //console.log(e.target.dataset.calcValue);
 
             if (e.target.dataset.calcValue === "decimal") {
-              //check if decimal is already placed
-              if (!calcInput.value.includes(".")) {
-                calcInput.value += ".";
-              } else {
-                //has decimal point
-              }
+              displayDecimal()
             }
 
             if (e.target.dataset.calcValue === "add") {
-              //set some button disabled/active
-              setButtonProperty("add");
-              num1 = calcInput.value;
-              calcInput.value = 0;
-              operation = 'add'
+             setOperation('add')
             
             }
             if (e.target.dataset.calcValue === "subtract") {
-              //set some button disabled/active
-              setButtonProperty("subtract");
-              num1 = calcInput.value;
-              calcInput.value = 0;
-              operation = 'subtract'
+              setOperation('subtract')
             
             }
 
             if (e.target.dataset.calcValue === "multiply") {
-              //set some button disabled/active
-              setButtonProperty("multiply");
-              num1 = calcInput.value;
-              calcInput.value = 0;
-              operation = 'multiply'
+              setOperation('multiply')
             
             }
 
             if (e.target.dataset.calcValue === "divide") {
-              //set some button disabled/active
-              setButtonProperty("divide");
-              num1 = calcInput.value;
-              calcInput.value = 0;
-              operation = 'divide'
+              setOperation('divide')
             
             }
 
@@ -263,10 +245,7 @@
             }
 
             if (e.target.dataset.calcValue === "answer") {
-              //calculate answer
-              num2 = calcInput.value;
-              calculate()
-              resetButtonProperty()
+              getAnswer()
 
             }
 
@@ -283,19 +262,61 @@
         }
       });
 
-      function setDisplay(e) {
+      window.addEventListener("keyup", (e)=>{
+          console.log(e.code)
+        switch (e.code) {
+          case 'Numpad0':
+          case 'Numpad1':
+          case 'Numpad2':
+          case 'Numpad3':
+          case 'Numpad4':
+          case 'Numpad5':
+          case 'Numpad6':
+          case 'Numpad7':
+          case 'Numpad8':
+          case 'Numpad9': setDisplay(e.key) 
+          break;
+          case 'Backspace': deleteLastInput()
+          break;
+          case 'NumpadAdd': setOperation('add')
+          break;
+          case 'NumpadSubtract': setOperation('subtract')
+          break;
+          case 'NumpadMultiply': setOperation('multiply')
+          break;
+          case 'NumpadDivide': setOperation('divide')
+          break;
+          case 'NumpadDecimal': displayDecimal()
+          break;
+          case 'NumpadEnter':  getAnswer()
+          break;
+          default:
+            break;
+        }
+      });
+
+      function setDisplay(val) {
         if(calcInput.value.includes(".")) {
-          calcInput.value = calcInput.value + e.target.dataset.numValue;
+          calcInput.value = calcInput.value + val;
         } 
-        else if ( e.target.dataset.numValue === 'sign') {
+        else if ( val === 'sign') {
           calcInput.value.includes("-")? calcInput.value = calcInput.value.substring(1): calcInput.value = '-' + calcInput.value;
         } 
         else if (calcInput.value == 0) {
-          calcInput.value = e.target.dataset.numValue;
+          calcInput.value = val;
         }
         else {
-          calcInput.value = calcInput.value + e.target.dataset.numValue;
+          calcInput.value = calcInput.value + val;
         }
+      }
+
+      function displayDecimal() {
+        //check if decimal is already placed
+        if (!calcInput.value.includes(".")) {
+                calcInput.value += ".";
+              } else {
+                //has decimal point
+              }
       }
 
       function setButtonProperty(operation) {
@@ -336,6 +357,21 @@
         calcInput.value = 0
         num1 = 0
         operation = ''
+      }
+
+      function setOperation(op) {
+         //set some button disabled/active
+         setButtonProperty(op);
+              num1 = calcInput.value;
+              calcInput.value = 0;
+              operation = op
+      }
+
+      function getAnswer() {
+        //calculate answer
+        num2 = calcInput.value;
+              calculate()
+              resetButtonProperty()
       }
 
       function calculate() {
