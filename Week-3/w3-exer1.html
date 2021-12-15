@@ -206,8 +206,7 @@
 
       wordChecker.addEventListener("click", (e) => {
         if (e.target.matches("button")) {
-          const wordInput = document.querySelector("#wordInput");
-          let wordOutputTable = document.querySelector(".div-table-2");
+          let wordInput = document.querySelector("#wordInput");
           let stringToast = document.querySelector("#myStringCheckerToast");
           let stringToastOutput = document.querySelector("#string-checker-toast");
           var myStringCheckerToast = bootstrap.Toast.getOrCreateInstance(stringToast);
@@ -229,7 +228,6 @@
           }
           if ("clearWord" in e.target.dataset === true) {
             wordInput.value = '';
-            wordOutputTable.innerHTML = "";
           }
         }
       });
@@ -237,7 +235,6 @@
       leapChecker.addEventListener("click", (e) => {
         if (e.target.matches("button")) {
           const yearInput = document.querySelector("#yearInput");
-          let yearOutputTable = document.querySelector(".div-table-3");
           let toastOutput = document.querySelector(".toast-body");
           let toast = document.querySelector(".toast");
           var myToast = bootstrap.Toast.getOrCreateInstance(toast);
@@ -268,7 +265,6 @@
         }
         if ("clearYear" in e.target.dataset === true) {
           yearInput.value = 0;
-          yearOutputTable.innerHTML = "";
         }
       });
     </script>
