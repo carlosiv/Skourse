@@ -59,6 +59,38 @@
           </div>
         </div>
         <div class="div-table mx-auto m-2 bg-primary rounded shadow" style="background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);"></div>
+        <div class="div-table-1 w-75 mx-auto">
+          <div
+            class="
+              toast-container
+              position-absolute
+              top-50
+              start-50
+              translate-middle
+            "
+            style="z-index: 11"
+          >
+            <div
+              id="myNumberToast"
+              class="toast hide"
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true"
+            >
+              <div class="toast-header bg-primary">
+                <strong class="me-auto text-white">Number Checker</strong>
+
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="toast"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="toast-body text-white p-3 text-center" id="number-checker-toast"></div>
+            </div>
+          </div>
+        </div>
       </section>
       <section class="exer2 container-fluid w-100">
         <div class="card border-gray m-3 mx-auto shadow" style="background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
@@ -191,8 +223,18 @@
         if (e.target.matches("button")) {
           const numberInput = document.querySelector("#numberInput");
           let outputTable = document.querySelector(".div-table");
+          let myNumberToast = document.querySelector("#myNumberToast");
+          let numberToastOutput = document.querySelector("#number-checker-toast");
+          var myNumberCheckerToast = bootstrap.Toast.getOrCreateInstance(myNumberToast);
+
           if ("calculate" in e.target.dataset === true) {
-            for (let i = 1; i <= numberInput.value; i++) {
+            //clear previous result/display
+            outputTable.innerHTML = "";
+            if (numberInput.value <= 0 || numberInput.value ==='') {
+              numberToastOutput.innerHTML = `<span class="fw-bold text-danger">The number cannot be empty or less than 1.</span>`;
+              myNumberCheckerToast.show();
+            } else {
+              for (let i = 1; i <= numberInput.value; i++) {
               if (i % 15 === 0) {
                 outputTable.innerHTML += `<span class="badge bg-primary m-4">Fizz Buzz</span>`;
               } else if (i % 5 === 0) {
@@ -202,6 +244,7 @@
               } else {
                 outputTable.innerHTML += `<span class="m-4">${i}</span>`;
               }
+            }
             }
           }
           if ("clear" in e.target.dataset === true) {
