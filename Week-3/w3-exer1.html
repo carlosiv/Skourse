@@ -13,17 +13,22 @@
     />
     <title>JavaScript Exercises 1</title>
     <style>
-      @media (min-width: 768px) { 
+      @media (min-width: 768px) {
         .card {
           width: 50%;
         }
-       }
+      }
     </style>
   </head>
   <body>
     <div class="container position-relative">
       <section class="exer1 container-fluid w-100 mt-5">
-        <div class="card border-gray mx-auto shadow" style="background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+        <div
+          class="card border-gray mx-auto shadow"
+          style="
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+          "
+        >
           <div class="card-body">
             <h5 class="card-title">Number Divisibility Checker</h5>
             <span class="card-text"
@@ -58,42 +63,20 @@
             </form>
           </div>
         </div>
-        <div class="div-table mx-auto m-2 bg-primary rounded shadow" style="background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);"></div>
-        <div class="div-table-1 w-75 mx-auto">
-          <div
-            class="
-              toast-container
-              position-absolute
-              top-50
-              start-50
-              translate-middle
-            "
-            style="z-index: 11"
-          >
-            <div
-              id="myNumberToast"
-              class="toast hide"
-              role="alert"
-              aria-live="assertive"
-              aria-atomic="true"
-            >
-              <div class="toast-header bg-primary">
-                <strong class="me-auto text-white">Number Checker</strong>
-
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="toast"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="toast-body text-white p-3 text-center" id="number-checker-toast"></div>
-            </div>
-          </div>
-        </div>
+        <div
+          class="div-table mx-auto m-2 bg-primary rounded shadow"
+          style="
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+          "
+        ></div>
       </section>
       <section class="exer2 container-fluid w-100">
-        <div class="card border-gray m-3 mx-auto shadow" style="background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+        <div
+          class="card border-gray m-3 mx-auto shadow"
+          style="
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+          "
+        >
           <div class="card-body">
             <h5 class="card-title">Word Location Checker</h5>
             <span class="card-text"
@@ -108,18 +91,10 @@
                 >
                 <input type="text" class="form-control w-25" id="wordInput" />
               </div>
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-calculate-word
-              >
+              <button type="button" class="btn btn-primary" data-calculate-word>
                 Check
               </button>
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-clear-word
-              >
+              <button type="button" class="btn btn-secondary" data-clear-word>
                 Clear
               </button>
             </form>
@@ -127,7 +102,12 @@
         </div>
       </section>
       <section class="exer3 container-fluid w-100 mb-5">
-        <div class="card border-gray m-3 mx-auto shadow" style="background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+        <div
+          class="card border-gray m-3 mx-auto shadow"
+          style="
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+          "
+        >
           <div class="card-body">
             <h5 class="card-title">Leap Year Checker</h5>
             <span class="card-text"
@@ -179,9 +159,7 @@
               ></button>
             </div>
             <div class="toast-body text-white p-3 text-center">
-              <span  class="fw-bold" id="toast-content">
-
-              </span>
+              <span class="fw-bold" id="toast-content"> </span>
             </div>
           </div>
         </div>
@@ -194,32 +172,34 @@
       const toastSelector = document.querySelector("#myToastCard");
       const toastTitle = document.querySelector("#toast-title");
       const toastContent = document.querySelector("#toast-content");
-         
+
       fizz.addEventListener("click", (e) => {
         if (e.target.matches("button")) {
           const numberInput = document.querySelector("#numberInput");
           let outputTable = document.querySelector(".div-table");
-          let myNumberToast = document.querySelector("#myNumberToast");
-          let numberToastOutput = document.querySelector("#number-checker-toast");
-          var myNumberCheckerToast = bootstrap.Toast.getOrCreateInstance(myNumberToast);
+          var myNumberCheckerToast =
+            bootstrap.Toast.getOrCreateInstance(toastSelector);
 
           if ("calculate" in e.target.dataset === true) {
             outputTable.innerHTML = "";
-            if (numberInput.value <= 0 || numberInput.value ==='') {
-              numberToastOutput.innerHTML = `<span class="fw-bold text-danger">The number cannot be empty or less than 1.</span>`;
+            if (numberInput.value <= 0 || numberInput.value === "") {
+              toastTitle.innerHTML = "Number Checker";
+              addTextClass("error");
+              toastContent.innerHTML =
+                "The number cannot be empty or less than 1.";
               myNumberCheckerToast.show();
             } else {
               for (let i = 1; i <= numberInput.value; i++) {
-              if (i % 15 === 0) {
-                outputTable.innerHTML += `<span class="badge bg-primary m-4">Fizz Buzz</span>`;
-              } else if (i % 5 === 0) {
-                outputTable.innerHTML += `<span class="badge bg-warning m-4">Buzz</span>`;
-              } else if (i % 3 === 0) {
-                outputTable.innerHTML += `<span class="badge bg-info m-4">Fizz</span>`;
-              } else {
-                outputTable.innerHTML += `<span class="m-4">${i}</span>`;
+                if (i % 15 === 0) {
+                  outputTable.innerHTML += `<span class="badge bg-primary m-4">Fizz Buzz</span>`;
+                } else if (i % 5 === 0) {
+                  outputTable.innerHTML += `<span class="badge bg-warning m-4">Buzz</span>`;
+                } else if (i % 3 === 0) {
+                  outputTable.innerHTML += `<span class="badge bg-info m-4">Fizz</span>`;
+                } else {
+                  outputTable.innerHTML += `<span class="m-4">${i}</span>`;
+                }
               }
-            }
             }
           }
           if ("clear" in e.target.dataset === true) {
@@ -234,22 +214,20 @@
           let wordInput = document.querySelector("#wordInput");
           const myToast = bootstrap.Toast.getOrCreateInstance(toastSelector);
           if ("calculateWord" in e.target.dataset === true) {
-              toastTitle.innerHTML = 'Word Checker'
-              if (wordInput.value === '') {
-               addTextClass('error')
-                toastContent.innerHTML = 'The string is empty';
-                  
-              } else {
-              addTextClass('success')
-              wordInput.value.startsWith('script',4) ?
-              toastContent.innerHTML = `The string <code>script</code> is found in <q class="text-primary">${wordInput.value}</q> at exact location.` :
-              toastContent.innerHTML = `The string <code>script</code> is NOT found in <q class="text-primary">${wordInput.value}</q> at exact location.`;
-              }
-              myToast.show();
-          
+            toastTitle.innerHTML = "Word Checker";
+            if (wordInput.value === "") {
+              addTextClass("error");
+              toastContent.innerHTML = "The string is empty";
+            } else {
+              addTextClass("success");
+              wordInput.value.startsWith("script", 4)
+                ? (toastContent.innerHTML = `The string <code>script</code> is found in <q class="text-primary">${wordInput.value}</q> at exact location.`)
+                : (toastContent.innerHTML = `The string <code>script</code> is NOT found in <q class="text-primary">${wordInput.value}</q> at exact location.`);
+            }
+            myToast.show();
           }
           if ("clearWord" in e.target.dataset === true) {
-            wordInput.value = '';
+            wordInput.value = "";
           }
         }
       });
@@ -259,30 +237,31 @@
           const yearInput = document.querySelector("#yearInput");
           const myToast = bootstrap.Toast.getOrCreateInstance(toastSelector);
           if ("calculateYear" in e.target.dataset === true) {
-            toastTitle.innerHTML = 'Leap Year Checker'
+            toastTitle.innerHTML = "Leap Year Checker";
             if (
               yearInput.value == 0 ||
               yearInput.value === "" ||
               yearInput.value < 0
             ) {
-              addTextClass('error')
-              toastContent.innerHTML = 'The year must not be empty or must be greater than 0';
+              addTextClass("error");
+              toastContent.innerHTML =
+                "The year must not be empty or must be greater than 0";
             } else {
               if (yearInput.value % 4 === 0) {
                 if (yearInput.value % 100 === 0) {
                   if (yearInput.value % 400 === 0) {
-                    addTextClass('success')
+                    addTextClass("success");
                     toastContent.innerHTML = `The year ${yearInput.value} is a leap year.`;
                   } else {
-                    addTextClass('error')
+                    addTextClass("error");
                     toastContent.innerHTML = `The year ${yearInput.value} is NOT a leap year.`;
                   }
                 } else {
-                  addTextClass('success')
+                  addTextClass("success");
                   toastContent.innerHTML = `The year ${yearInput.value} is a leap year.`;
                 }
               } else {
-                addTextClass('error')
+                addTextClass("error");
                 toastContent.innerHTML = `The year ${yearInput.value} is NOT a leap year.`;
               }
             }
@@ -295,12 +274,12 @@
       });
 
       function addTextClass(params) {
-        if (params === 'error') {
-          toastContent.classList.remove('text-dark')
-          toastContent.classList.add('text-danger')
+        if (params === "error") {
+          toastContent.classList.remove("text-dark");
+          toastContent.classList.add("text-danger");
         } else {
-          toastContent.classList.remove('text-danger')
-          toastContent.classList.add('text-dark')
+          toastContent.classList.remove("text-danger");
+          toastContent.classList.add("text-dark");
         }
       }
     </script>
