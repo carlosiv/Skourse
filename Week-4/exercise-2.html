@@ -95,347 +95,342 @@
     </div>
 
     <script>
-        //Local Time
-      const canvas = document.getElementById("canvas-clock");
-      canvas.style.backgroundColor = "white";
-      canvas.style.borderRadius = "10px";
-      canvas.style.boxShadow = "5px 10px 8px #888888"
-      const ctx = canvas.getContext("2d");
-      ctx.lineCap = 'round';
-      ctx.lineWidth = 15;
-      ctx.strokeStyle = 'green'
+//Local Time
+const canvas = document.getElementById("canvas-clock");
+        canvas.style.backgroundColor = "white";
+        canvas.style.borderRadius = "10px";
+        canvas.style.boxShadow = "5px 10px 8px #888888"
+        const ctx = canvas.getContext("2d");
+        ctx.lineCap = 'round';
+        ctx.lineWidth = 15;
+        ctx.strokeStyle = 'green'
 
-      function renderSegment(value, startX=0,startY=0) {
-        ctx.beginPath();
-        
-          //A
-          if (value >> 6 & 1) {
-            ctx.moveTo(startX + 20, startY + 10);
-          ctx.lineTo(startX + 50, startY + 10);
-          }
-          
-          //B
-          if (value >> 5 & 1) {
-            ctx.moveTo(startX + 60, startY + 25);
-          ctx.lineTo(startX + 60, startY + 55);
-          }
-          
-          //C
-          if (value >> 4 & 1) {
-            ctx.moveTo(startX + 60, startY + 75);
-          ctx.lineTo(startX + 60, startY + 105);
-          }
-         
-          //D
-          if (value >> 3 & 1) {
-            ctx.moveTo(startX + 20, startY + 120);
-          ctx.lineTo(startX + 50, startY + 120);
-          }
-         
-          //E
-          if (value >> 2 & 1) {
-            ctx.moveTo(startX + 10, startY + 75);
-          ctx.lineTo(startX + 10, startY + 105);
-          }
+        function renderSegment(value, startX = 0, startY = 0) {
+        	ctx.beginPath();
 
-          //F
-          if (value >> 1 & 1) {
-            ctx.moveTo(startX + 10, startY + 25);
-          ctx.lineTo(startX + 10, startY + 55);
-          }
-          
-          //G
-          if (value >> 0 & 1) {
-            ctx.moveTo(startX + 25, startY + 65);
-          ctx.lineTo(startX + 45, startY + 65);
-          }
-          
-          ctx.stroke();
-      }
+        	//A
+        	if (value >> 6 & 1) {
+        		ctx.moveTo(startX + 20, startY + 10);
+        		ctx.lineTo(startX + 50, startY + 10);
+        	}
 
-      function renderSpacerL(startX=0,startY=0) {
-        ctx.beginPath();
-        ctx.moveTo(startX + 10, startY + 40);
-          ctx.lineTo(startX + 10, startY + 40);
-          ctx.moveTo(startX + 10, startY + 90);
-          ctx.lineTo(startX + 10, startY + 90);
-          ctx.stroke();
-      }
+        	//B
+        	if (value >> 5 & 1) {
+        		ctx.moveTo(startX + 60, startY + 25);
+        		ctx.lineTo(startX + 60, startY + 55);
+        	}
 
-      const numsLT = [
-          //0-9 and index of nums[index] = num output
-          //0x77 = A, 
-          '0x7E','0x30','0x6D','0x79','0x33','0x5B','0x5F','0x70','0x7F','0x7B','0x77','0x67'
-      ]
+        	//C
+        	if (value >> 4 & 1) {
+        		ctx.moveTo(startX + 60, startY + 75);
+        		ctx.lineTo(startX + 60, startY + 105);
+        	}
 
-      let timeFormat = 12
-      
-      function getValue(radio) {
-        timeFormat = radio.value;
-    }
-   
-      function setTime12() {
-        const today = new Date();
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        	//D
+        	if (value >> 3 & 1) {
+        		ctx.moveTo(startX + 20, startY + 120);
+        		ctx.lineTo(startX + 50, startY + 120);
+        	}
 
-      if (timeFormat == 12) {
-        renderSpacerL(160,10)
-        renderSpacerL(320,10)
-        
-        if (today.getHours() % 12 === 0 ) {
-          renderSegment(numsLT[1],20,20)
-      renderSegment(numsLT[2],90,10)
-        }
-        else if (today.getHours() < 12) {
-          if (today.getHours() >= 10) {
-          let num1 = Math.floor(today.getHours() / 10);
-          let num2 = today.getHours() % 10
-          renderSegment(numsLT[num1],20,20)
-      renderSegment(numsLT[num2],90,10)
-         
-        } else {
-          renderSegment(numsLT[0],20,10)
-      renderSegment(numsLT[today.getHours()],90,10)
-        }
-        } else {
-          if (today.getHours() % 12 === 0 ) {
-          renderSegment(numsLT[1],20,20)
-      renderSegment(numsLT[2],90,10)
-        }
-        else if ((today.getHours()-12) >= 10) {
-            let num1 = Math.floor((today.getHours()-12) / 10);
-            let num2 = (today.getHours()-12) % 10
-          renderSegment(numsLT[num1],20,10)
-      renderSegment(numsLT[num2],90,10)
-         
-        } else {
-          renderSegment(numsLT[0],20,10)
-      renderSegment(numsLT[today.getHours()-12],90,10)
-        }
-          
+        	//E
+        	if (value >> 2 & 1) {
+        		ctx.moveTo(startX + 10, startY + 75);
+        		ctx.lineTo(startX + 10, startY + 105);
+        	}
+
+        	//F
+        	if (value >> 1 & 1) {
+        		ctx.moveTo(startX + 10, startY + 25);
+        		ctx.lineTo(startX + 10, startY + 55);
+        	}
+
+        	//G
+        	if (value >> 0 & 1) {
+        		ctx.moveTo(startX + 25, startY + 65);
+        		ctx.lineTo(startX + 45, startY + 65);
+        	}
+
+        	ctx.stroke();
         }
 
-        if (today.getMinutes() >= 10) {
-          let num1 = Math.floor(today.getMinutes() / 10);
-          let num2 = today.getMinutes() % 10
-          renderSegment(numsLT[num1],180,10)
-      renderSegment(numsLT[num2],250,10)
-        } else {
-          renderSegment(numsLT[0],180,10)
-      renderSegment(numsLT[today.getMinutes()],250,10)
+        function renderSpacerL(startX = 0, startY = 0) {
+        	ctx.beginPath();
+        	ctx.moveTo(startX + 10, startY + 40);
+        	ctx.lineTo(startX + 10, startY + 40);
+        	ctx.moveTo(startX + 10, startY + 90);
+        	ctx.lineTo(startX + 10, startY + 90);
+        	ctx.stroke();
         }
 
-        if ( today.getSeconds() >= 10) {
-          let num1 = Math.floor( today.getSeconds() / 10);
-          let num2 =  today.getSeconds() % 10
-          renderSegment(numsLT[num1],340,10)
-      renderSegment(numsLT[num2],410,10)
-        } else {
-          renderSegment(numsLT[0],340,10)
-      renderSegment(numsLT[today.getSeconds()],410,10)
+        const numsLT = [
+        	//0-9 and index of nums[index] = num output
+        	//0x77 = A, 
+        	'0x7E', '0x30', '0x6D', '0x79', '0x33', '0x5B', '0x5F', '0x70', '0x7F', '0x7B', '0x77', '0x67'
+        ]
+
+        let timeFormat = 12
+
+        function getValue(radio) {
+        	timeFormat = radio.value;
         }
 
-        today.getHours() < 12 ? renderSegment(numsLT[10],500,10) : renderSegment(numsLT[11],500,10);
-      } else {
-        renderSpacerL(200,10)
-        renderSpacerL(360,10)
-        if (today.getHours() >= 10) {
-          let num1 = Math.floor(today.getHours() / 10);
-          let num2 = today.getHours() % 10
-          renderSegment(numsLT[num1],60,10)
-      renderSegment(numsLT[num2],130,10)
-         
-        } else {
-          renderSegment(numsLT[0],60,10)
-      renderSegment(numsLT[today.getHours()],130,10)
+        function setTime12() {
+        	const today = new Date();
+        	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        	if (timeFormat == 12) {
+        		renderSpacerL(160, 10)
+        		renderSpacerL(320, 10)
+
+        		if (today.getHours() % 12 === 0) {
+        			renderSegment(numsLT[1], 20, 20)
+        			renderSegment(numsLT[2], 90, 10)
+        		} else if (today.getHours() < 12) {
+        			if (today.getHours() >= 10) {
+        				let num1 = Math.floor(today.getHours() / 10);
+        				let num2 = today.getHours() % 10
+        				renderSegment(numsLT[num1], 20, 20)
+        				renderSegment(numsLT[num2], 90, 10)
+
+        			} else {
+        				renderSegment(numsLT[0], 20, 10)
+        				renderSegment(numsLT[today.getHours()], 90, 10)
+        			}
+        		} else {
+        			if (today.getHours() % 12 === 0) {
+        				renderSegment(numsLT[1], 20, 20)
+        				renderSegment(numsLT[2], 90, 10)
+        			} else if ((today.getHours() - 12) >= 10) {
+        				let num1 = Math.floor((today.getHours() - 12) / 10);
+        				let num2 = (today.getHours() - 12) % 10
+        				renderSegment(numsLT[num1], 20, 10)
+        				renderSegment(numsLT[num2], 90, 10)
+
+        			} else {
+        				renderSegment(numsLT[0], 20, 10)
+        				renderSegment(numsLT[today.getHours() - 12], 90, 10)
+        			}
+
+        		}
+
+        		if (today.getMinutes() >= 10) {
+        			let num1 = Math.floor(today.getMinutes() / 10);
+        			let num2 = today.getMinutes() % 10
+        			renderSegment(numsLT[num1], 180, 10)
+        			renderSegment(numsLT[num2], 250, 10)
+        		} else {
+        			renderSegment(numsLT[0], 180, 10)
+        			renderSegment(numsLT[today.getMinutes()], 250, 10)
+        		}
+
+        		if (today.getSeconds() >= 10) {
+        			let num1 = Math.floor(today.getSeconds() / 10);
+        			let num2 = today.getSeconds() % 10
+        			renderSegment(numsLT[num1], 340, 10)
+        			renderSegment(numsLT[num2], 410, 10)
+        		} else {
+        			renderSegment(numsLT[0], 340, 10)
+        			renderSegment(numsLT[today.getSeconds()], 410, 10)
+        		}
+
+        		today.getHours() < 12 ? renderSegment(numsLT[10], 500, 10) : renderSegment(numsLT[11], 500, 10);
+        	} else {
+        		renderSpacerL(200, 10)
+        		renderSpacerL(360, 10)
+        		if (today.getHours() >= 10) {
+        			let num1 = Math.floor(today.getHours() / 10);
+        			let num2 = today.getHours() % 10
+        			renderSegment(numsLT[num1], 60, 10)
+        			renderSegment(numsLT[num2], 130, 10)
+
+        		} else {
+        			renderSegment(numsLT[0], 60, 10)
+        			renderSegment(numsLT[today.getHours()], 130, 10)
+        		}
+
+        		if (today.getMinutes() >= 10) {
+        			let num1 = Math.floor(today.getMinutes() / 10);
+        			let num2 = today.getMinutes() % 10
+        			renderSegment(numsLT[num1], 220, 10)
+        			renderSegment(numsLT[num2], 290, 10)
+        		} else {
+        			renderSegment(numsLT[0], 220, 10)
+        			renderSegment(numsLT[today.getMinutes()], 290, 10)
+        		}
+
+        		if (today.getSeconds() >= 10) {
+        			let num1 = Math.floor(today.getSeconds() / 10);
+        			let num2 = today.getSeconds() % 10
+        			renderSegment(numsLT[num1], 380, 10)
+        			renderSegment(numsLT[num2], 450, 10)
+        		} else {
+        			renderSegment(numsLT[0], 380, 10)
+        			renderSegment(numsLT[today.getSeconds()], 450, 10)
+        		}
+        	}
+
+
         }
 
-        if (today.getMinutes() >= 10) {
-          let num1 = Math.floor(today.getMinutes() / 10);
-          let num2 = today.getMinutes() % 10
-          renderSegment(numsLT[num1],220,10)
-      renderSegment(numsLT[num2],290,10)
-        } else {
-          renderSegment(numsLT[0],220,10)
-      renderSegment(numsLT[today.getMinutes()],290,10)
+        setInterval(setTime12, 1000);
+        //End Local Time
+
+        //Timer
+        const audioAlarm = document.querySelector(`audio[data-key="alarm"]`)
+        const audioError = document.querySelector(`audio[data-key="error"]`)
+        const canvasTimer = document.getElementById("canvas-timer");
+        canvasTimer.style.backgroundColor = "white";
+        canvasTimer.style.borderRadius = "10px";
+        canvasTimer.style.boxShadow = "5px 10px 8px #888888"
+        const ctxTimer = canvasTimer.getContext("2d");
+        ctxTimer.lineCap = 'round';
+        ctxTimer.lineWidth = 15;
+        ctxTimer.strokeStyle = 'blue'
+
+        function renderSegmentTimer(value, startX = 0, startY = 0) {
+        	ctxTimer.beginPath();
+
+        	//A
+        	if (value >> 6 & 1) {
+        		ctxTimer.moveTo(startX + 20, startY + 10);
+        		ctxTimer.lineTo(startX + 50, startY + 10);
+        	}
+
+        	//B
+        	if (value >> 5 & 1) {
+        		ctxTimer.moveTo(startX + 60, startY + 25);
+        		ctxTimer.lineTo(startX + 60, startY + 55);
+        	}
+
+        	//C
+        	if (value >> 4 & 1) {
+        		ctxTimer.moveTo(startX + 60, startY + 75);
+        		ctxTimer.lineTo(startX + 60, startY + 105);
+        	}
+
+        	//D
+        	if (value >> 3 & 1) {
+        		ctxTimer.moveTo(startX + 20, startY + 120);
+        		ctxTimer.lineTo(startX + 50, startY + 120);
+        	}
+
+        	//E
+        	if (value >> 2 & 1) {
+        		ctxTimer.moveTo(startX + 10, startY + 75);
+        		ctxTimer.lineTo(startX + 10, startY + 105);
+        	}
+
+        	//F
+        	if (value >> 1 & 1) {
+        		ctxTimer.moveTo(startX + 10, startY + 25);
+        		ctxTimer.lineTo(startX + 10, startY + 55);
+        	}
+
+        	//G
+        	if (value >> 0 & 1) {
+        		ctxTimer.moveTo(startX + 25, startY + 65);
+        		ctxTimer.lineTo(startX + 45, startY + 65);
+        	}
+
+        	ctxTimer.stroke();
         }
 
-        if ( today.getSeconds() >= 10) {
-          let num1 = Math.floor( today.getSeconds() / 10);
-          let num2 =  today.getSeconds() % 10
-          renderSegment(numsLT[num1],380,10)
-      renderSegment(numsLT[num2],450,10)
-        } else {
-          renderSegment(numsLT[0],380,10)
-      renderSegment(numsLT[today.getSeconds()],450,10)
+        function renderSpacerTimer(startX = 0, startY = 0) {
+        	ctxTimer.beginPath();
+        	ctxTimer.moveTo(startX + 10, startY + 40);
+        	ctxTimer.lineTo(startX + 10, startY + 40);
+        	ctxTimer.moveTo(startX + 10, startY + 90);
+        	ctxTimer.lineTo(startX + 10, startY + 90);
+        	ctxTimer.stroke();
         }
-      }
 
-        
-      }
-
-      setInterval(setTime12, 1000);
-      //End Local Time
-
-      //Timer
-      const audioAlarm = document.querySelector(`audio[data-key="alarm"]`)
-      const audioError = document.querySelector(`audio[data-key="error"]`)
-      const canvasTimer = document.getElementById("canvas-timer");
-      canvasTimer.style.backgroundColor = "white";
-      canvasTimer.style.borderRadius = "10px";
-      canvasTimer.style.boxShadow = "5px 10px 8px #888888"
-      const ctxTimer = canvasTimer.getContext("2d");
-      ctxTimer.lineCap = 'round';
-      ctxTimer.lineWidth = 15;
-      ctxTimer.strokeStyle = 'blue'
-      function renderSegmentTimer(value, startX=0,startY=0) {
-        ctxTimer.beginPath();
-        
-          //A
-          if (value >> 6 & 1) {
-            ctxTimer.moveTo(startX + 20, startY + 10);
-          ctxTimer.lineTo(startX + 50, startY + 10);
-          }
-          
-          //B
-          if (value >> 5 & 1) {
-            ctxTimer.moveTo(startX + 60, startY + 25);
-          ctxTimer.lineTo(startX + 60, startY + 55);
-          }
-          
-          //C
-          if (value >> 4 & 1) {
-            ctxTimer.moveTo(startX + 60, startY + 75);
-          ctxTimer.lineTo(startX + 60, startY + 105);
-          }
-         
-          //D
-          if (value >> 3 & 1) {
-            ctxTimer.moveTo(startX + 20, startY + 120);
-          ctxTimer.lineTo(startX + 50, startY + 120);
-          }
-         
-          //E
-          if (value >> 2 & 1) {
-            ctxTimer.moveTo(startX + 10, startY + 75);
-          ctxTimer.lineTo(startX + 10, startY + 105);
-          }
-
-          //F
-          if (value >> 1 & 1) {
-            ctxTimer.moveTo(startX + 10, startY + 25);
-          ctxTimer.lineTo(startX + 10, startY + 55);
-          }
-          
-          //G
-          if (value >> 0 & 1) {
-            ctxTimer.moveTo(startX + 25, startY + 65);
-          ctxTimer.lineTo(startX + 45, startY + 65);
-          }
-          
-          ctxTimer.stroke();
-      }
-
-      function renderSpacerTimer(startX=0,startY=0) {
-        ctxTimer.beginPath();
-        ctxTimer.moveTo(startX + 10, startY + 40);
-          ctxTimer.lineTo(startX + 10, startY + 40);
-          ctxTimer.moveTo(startX + 10, startY + 90);
-          ctxTimer.lineTo(startX + 10, startY + 90);
-          ctxTimer.stroke();
-      }
-      
-      function initTimerNum() {
-        renderSegmentTimer(numsLT[8],70,10)
-      renderSegmentTimer(numsLT[8],140,10)
-      renderSpacerTimer(210,10)
-      renderSegmentTimer(numsLT[8],230,10)
-      renderSegmentTimer(numsLT[8],300,10)
-      renderSpacerTimer(370,10)
-      renderSegmentTimer(numsLT[8],390,10)
-      renderSegmentTimer(numsLT[8],460,10)
-      }
-
-      startButton = document.querySelector(".btn")
-      timerHours = document.getElementById("hrs")
-      timerMinutes = document.getElementById("min")
-      timerSeconds = document.getElementById("sec")
-      
-      initTimerNum()
-
-      startButton.addEventListener('click', (e)=>{
-
-          e.preventDefault()
-          newTimer = parseInt(timerHours.value)*60*60 + parseInt(timerMinutes.value)*60 + parseInt(timerSeconds.value)
-         
-         remainingHours = Math.floor(newTimer/3600)
-         remainingMinutes = Math.floor((newTimer-remainingHours*3600)/60)
-         remainingSeconds = newTimer - (remainingMinutes*60 + remainingHours*3600)
-         if (parseInt(timerHours.value) > 99 ||  parseInt(timerMinutes.value) > 59 ||
-         parseInt(timerSeconds.value) > 59 || newTimer <= 0 ) {
-          endTimer("Input a valid time",'error')
-         }
-       else
-     {
-            let timer = setInterval( ()=> {
-            ctxTimer.clearRect(0, 0, canvas.width, canvas.height);
-            renderSpacerTimer(210,10)
-            renderSpacerTimer(370,10)
-              if (newTimer > 0) {
-                remainingHours = Math.floor(newTimer/3600)
-                remainingMinutes = Math.floor((newTimer-remainingHours*3600)/60)
-                remainingSeconds = newTimer - (remainingMinutes*60 + remainingHours*3600)
-                newTimer--
-              if (remainingHours >= 10) {
-          let num1 = Math.floor(remainingHours / 10);
-          let num2 = remainingHours % 10
-          renderSegmentTimer(numsLT[num1],70,10)
-      renderSegmentTimer(numsLT[num2],140,10)
-        } else {
-          renderSegmentTimer(numsLT[0],70,10)
-      renderSegmentTimer(numsLT[remainingHours],140,10)
+        function initTimerNum() {
+        	renderSegmentTimer(numsLT[8], 70, 10)
+        	renderSegmentTimer(numsLT[8], 140, 10)
+        	renderSpacerTimer(210, 10)
+        	renderSegmentTimer(numsLT[8], 230, 10)
+        	renderSegmentTimer(numsLT[8], 300, 10)
+        	renderSpacerTimer(370, 10)
+        	renderSegmentTimer(numsLT[8], 390, 10)
+        	renderSegmentTimer(numsLT[8], 460, 10)
         }
-        
-        if (remainingMinutes >= 10) {
-          let num1 = Math.floor(remainingMinutes / 10);
-          let num2 = remainingMinutes % 10
-          renderSegmentTimer(numsLT[num1],230,10)
-      renderSegmentTimer(numsLT[num1],300,10)
-        } else {
-          renderSegmentTimer(numsLT[0],230,10)
-      renderSegmentTimer(numsLT[remainingMinutes],300,10)
-        }
-        
-        if (remainingSeconds >= 10) {
-          let num1 = Math.floor(remainingSeconds / 10);
-          let num2 = remainingSeconds % 10
-          renderSegmentTimer(numsLT[num1],390,10)
-      renderSegmentTimer(numsLT[num2],460,10)
-        } else {
-          renderSegmentTimer(numsLT[0],390,10)
-      renderSegmentTimer(numsLT[remainingSeconds],460,10)
-        }
-              } else {
-                console.log(newTimer--)
-                clearInterval(timer)
-                endTimer("Time's Up!",'alarm')
-              }
-          }, 1000);
-       
-      }
-    }
-      )
 
-      function endTimer(msg,beep) {
-        beep == 'alarm' ? audioAlarm.play() : audioError.play()
-        setTimeout(function(){ alert(msg); }, 1000);
-        
+        startButton = document.querySelector(".btn")
+        timerHours = document.getElementById("hrs")
+        timerMinutes = document.getElementById("min")
+        timerSeconds = document.getElementById("sec")
+
         initTimerNum()
-               
-            
-      }
 
-      //End Timer
+        startButton.addEventListener('click', (e) => {
+
+        	e.preventDefault()
+        	newTimer = parseInt(timerHours.value) * 60 * 60 + parseInt(timerMinutes.value) * 60 + parseInt(timerSeconds.value)
+
+        	remainingHours = Math.floor(newTimer / 3600)
+        	remainingMinutes = Math.floor((newTimer - remainingHours * 3600) / 60)
+        	remainingSeconds = newTimer - (remainingMinutes * 60 + remainingHours * 3600)
+        	if (parseInt(timerHours.value) > 99 || parseInt(timerMinutes.value) > 59 ||
+        		parseInt(timerSeconds.value) > 59 || newTimer <= 0) {
+        		endTimer("Input a valid time", 'error')
+        	} else {
+        		let timer = setInterval(() => {
+        			ctxTimer.clearRect(0, 0, canvas.width, canvas.height);
+        			renderSpacerTimer(210, 10)
+        			renderSpacerTimer(370, 10)
+        			if (newTimer > 0) {
+        				remainingHours = Math.floor(newTimer / 3600)
+        				remainingMinutes = Math.floor((newTimer - remainingHours * 3600) / 60)
+        				remainingSeconds = newTimer - (remainingMinutes * 60 + remainingHours * 3600)
+        				newTimer--
+        				if (remainingHours >= 10) {
+        					let num1 = Math.floor(remainingHours / 10);
+        					let num2 = remainingHours % 10
+        					renderSegmentTimer(numsLT[num1], 70, 10)
+        					renderSegmentTimer(numsLT[num2], 140, 10)
+        				} else {
+        					renderSegmentTimer(numsLT[0], 70, 10)
+        					renderSegmentTimer(numsLT[remainingHours], 140, 10)
+        				}
+
+        				if (remainingMinutes >= 10) {
+        					let num1 = Math.floor(remainingMinutes / 10);
+        					let num2 = remainingMinutes % 10
+        					renderSegmentTimer(numsLT[num1], 230, 10)
+        					renderSegmentTimer(numsLT[num1], 300, 10)
+        				} else {
+        					renderSegmentTimer(numsLT[0], 230, 10)
+        					renderSegmentTimer(numsLT[remainingMinutes], 300, 10)
+        				}
+
+        				if (remainingSeconds >= 10) {
+        					let num1 = Math.floor(remainingSeconds / 10);
+        					let num2 = remainingSeconds % 10
+        					renderSegmentTimer(numsLT[num1], 390, 10)
+        					renderSegmentTimer(numsLT[num2], 460, 10)
+        				} else {
+        					renderSegmentTimer(numsLT[0], 390, 10)
+        					renderSegmentTimer(numsLT[remainingSeconds], 460, 10)
+        				}
+        			} else {
+        				console.log(newTimer--)
+        				clearInterval(timer)
+        				endTimer("Time's Up!", 'alarm')
+        			}
+        		}, 1000);
+
+        	}
+        })
+
+        function endTimer(msg, beep) {
+        	beep == 'alarm' ? audioAlarm.play() : audioError.play()
+        	setTimeout(function () {
+        		alert(msg);
+        	}, 1000);
+        	initTimerNum()
+        }
+
+        //End Timer
     </script>
   </body>
 </html>
