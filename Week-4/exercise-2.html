@@ -84,7 +84,8 @@
                    value="0">
                   </div>
                 <div class="col-sm-12 text-center m-2">
-                  <button type="submit" class="btn btn-primary">Start</button>
+                  <button type="submit" class="btn btn-primary" id="start">Start</button>
+                  <button type="submit" class="btn btn-warning" id="reset">Reset</button>
                 </div>
               </form>
           </div>
@@ -353,29 +354,26 @@ const canvas = document.getElementById("canvas-clock");
         	renderSpacerTimer(370, 10)
         	renderSegmentTimer(numsLT[8], 390, 10)
         	renderSegmentTimer(numsLT[8], 460, 10)
+
+			
         }
 
-        startButton = document.querySelector(".btn")
+		function clearInputs() {
+			timerHours.value = 0
+        timerMinutes.value = 0
+        timerSeconds.value = 0
+		}
+
+        startButton = document.querySelector("#start")
+        resetButton = document.querySelector("#reset")
         timerHours = document.getElementById("hrs")
         timerMinutes = document.getElementById("min")
         timerSeconds = document.getElementById("sec")
 
         initTimerNum()
-
-        startButton.addEventListener('click', (e) => {
-
-        	e.preventDefault()
-        	newTimer = parseInt(timerHours.value) * 60 * 60 + parseInt(timerMinutes.value) * 60 + parseInt(timerSeconds.value)
-
-        	remainingHours = Math.floor(newTimer / 3600)
-        	remainingMinutes = Math.floor((newTimer - remainingHours * 3600) / 60)
-        	remainingSeconds = newTimer - (remainingMinutes * 60 + remainingHours * 3600)
-        	if (parseInt(timerHours.value) > 99 || parseInt(timerMinutes.value) > 59 ||
-        		parseInt(timerSeconds.value) > 59 || newTimer <= 0) {
-        		endTimer("Input a valid time", 'error')
-        	} else {
-        		let timer = setInterval(() => {
-        			ctxTimer.clearRect(0, 0, canvas.width, canvas.height);
+		let timer
+		function showTime() {
+			ctxTimer.clearRect(0, 0, canvas.width, canvas.height);
         			renderSpacerTimer(210, 10)
         			renderSpacerTimer(370, 10)
         			if (newTimer > 0) {
@@ -413,14 +411,43 @@ const canvas = document.getElementById("canvas-clock");
         					renderSegmentTimer(numsLT[remainingSeconds], 460, 10)
         				}
         			} else {
+
         				console.log(newTimer--)
         				clearInterval(timer)
         				endTimer("Time's Up!", 'alarm')
         			}
+		}
+
+        startButton.addEventListener('click', (e) => {
+
+        	e.preventDefault()
+        	newTimer = parseInt(timerHours.value) * 60 * 60 + parseInt(timerMinutes.value) * 60 + parseInt(timerSeconds.value)
+
+        	remainingHours = Math.floor(newTimer / 3600)
+        	remainingMinutes = Math.floor((newTimer - remainingHours * 3600) / 60)
+        	remainingSeconds = newTimer - (remainingMinutes * 60 + remainingHours * 3600)
+        	if (parseInt(timerHours.value) > 99 || parseInt(timerMinutes.value) > 59 ||
+        		parseInt(timerSeconds.value) > 59 || newTimer <= 0) {
+        		endTimer("Input a valid time", 'error')
+        	} else {
+				document.getElementById("start").disabled = true;
+				clearInputs()
+        		timer = setInterval(() => {
+        			showTime()
         		}, 1000);
 
         	}
         })
+
+	resetButton.addEventListener('click', (e) => {
+
+			e.preventDefault()
+			document.getElementById("start").disabled = false;
+			clearInterval(timer)
+			initTimerNum()
+			clearInputs()
+			
+		})
 
         function endTimer(msg, beep) {
         	beep == 'alarm' ? audioAlarm.play() : audioError.play()
